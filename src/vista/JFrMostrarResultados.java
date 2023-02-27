@@ -34,20 +34,19 @@ public class JFrMostrarResultados extends javax.swing.JFrame {
             modelo.setColumnIdentifiers(titulo);
             jTableResultados.setModel(modelo);
 
-            int x = -1, a = -1, c = -1, m = -1, n = -1;
+            int x = -1, a = -1, c = -1, m = -1;
             do {
 
                 x = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la semilla x"));
                 a = Integer.parseInt(JOptionPane.showInputDialog("El multiplicador a"));
                 c = Integer.parseInt(JOptionPane.showInputDialog("Constante aditiva c"));
                 m = Integer.parseInt(JOptionPane.showInputDialog("El módulo m"));
-                n = Integer.parseInt(JOptionPane.showInputDialog("Cuantos números quiere ver"));
 
-            } while (x < 0 && a < 0 && c < 0 && m < 0 && n < 0);
+            } while (x < 0 && a < 0 && c < 0 && m < 0);
 
-            numerosEnteros = generador.genCongruencialMixto(x, a, c, m, n);
+            numerosEnteros = generador.genCongruencialMixto(x, a, c, m);
 
-            String[] info = new String[n];
+            String[] info = new String[numerosEnteros.size()];
             info[2] = Integer.toString(a);
             info[3] = Integer.toString(c);
             info[4] = Integer.toString(m);
@@ -58,6 +57,62 @@ public class JFrMostrarResultados extends javax.swing.JFrame {
                     info[2] = "";
                     info[3] = "";
                     info[4] = "";
+                }
+                modelo.addRow(info);
+            }
+        }
+        if (metodo.equalsIgnoreCase("multiplicativo")) {
+            String[] titulo = new String[]{"n", "Xo", "a", "m"};
+            modelo.setColumnIdentifiers(titulo);
+            jTableResultados.setModel(modelo);
+
+            int x = -1, a = -1, m = -1;
+            do {
+
+                x = Integer.parseInt(JOptionPane.showInputDialog("Introduzca la semilla de la función: "));
+                a = Integer.parseInt(JOptionPane.showInputDialog("Introduzca la constante multiplicativa de la función: "));
+                m = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el módulo de la función: "));
+
+            } while (x < 0 && a < 0 && m < 0);
+
+            numerosEnteros = generador.genConMultiplicativo(x, a, m);
+
+            String[] info = new String[numerosEnteros.size()];
+            info[2] = Integer.toString(a);
+            info[3] = Integer.toString(m);
+            for (int i = 0; i < numerosEnteros.size(); i++) {
+                info[0] = Integer.toString(i);
+                info[1] = Integer.toString(numerosEnteros.get(i));
+                if (i > 0) {
+                    info[2] = "";
+                    info[3] = "";
+                }
+                modelo.addRow(info);
+            }
+        }
+        if (metodo.equalsIgnoreCase("fibonacci")) {
+            String[] titulo = new String[]{"n", "X", "m"};
+            modelo.setColumnIdentifiers(titulo);
+            jTableResultados.setModel(modelo);
+
+            int x1 = -1, x2 = -1, m = -1;
+            do {
+
+                x1 = Integer.parseInt(JOptionPane.showInputDialog("Valor para x1: "));
+                x2 = Integer.parseInt(JOptionPane.showInputDialog("Valor para x2: "));
+                m = Integer.parseInt(JOptionPane.showInputDialog("Valor para el modulo m:"));
+
+            } while (x1 < 0 && x2 < 0 && m < 0);
+
+            numerosEnteros = generador.fibonacci(x1, x2, m);
+
+            String[] info = new String[numerosEnteros.size()];
+            info[2] = Integer.toString(m);
+            for (int i = 0; i < numerosEnteros.size(); i++) {
+                info[0] = Integer.toString(i);
+                info[1] = Integer.toString(numerosEnteros.get(i));
+                if (i > 0) {
+                    info[2] = "";
                 }
                 modelo.addRow(info);
             }
