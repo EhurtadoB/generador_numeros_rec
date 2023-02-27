@@ -5,6 +5,7 @@
  */
 package logica;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -103,15 +104,6 @@ public class Generador {
         ArrayList<Integer> numerosEnteros = new ArrayList<>();
         ArrayList<Float> numerosRango = new ArrayList<>();
 
-
-        /*System.out.println("Valor para el modulo m: ");
-        int m = Integer.parseInt(leer.next());
-
-        System.out.println("Valor para x1: ");
-        numerosEnteros.add(Integer.parseInt(leer.next()));
-
-        System.out.println("Valor para x2: ");
-        numerosEnteros.add(Integer.parseInt(leer.next()));*/
         numerosEnteros.add(x1);
         numerosEnteros.add(x2);
         for (int i = 2; i < m; i++) {
@@ -130,11 +122,154 @@ public class Generador {
         System.out.println("");
         System.out.println("************************Numeros Enteros gemerados********************");
 
-        for (int i = 0; i < m;  i++) {
+        for (int i = 0; i < m; i++) {
             System.out.println(i + "  " + numerosEnteros.get(i) + " en el rango de 0 a 1 es " + numerosRango.get(i));
         }
         return numerosEnteros;
+    }
 
+    public ArrayList<ArrayList> cuadradosMedios(int x1, int n) {
+        ArrayList<Integer> numerosEnteros = new ArrayList<>();
+        ArrayList<Float> numerosRango = new ArrayList<>();
+        ArrayList<Long> valoresCuadrados = new ArrayList<>();
+        ArrayList<ArrayList> datos = new ArrayList();
+        int tamDigitos;
+
+ 
+        numerosEnteros.add(x1);
+
+        int tam = String.valueOf(numerosEnteros.get(0)).length();
+        for (int i = 0; i < n; i++) {
+            valoresCuadrados.add((long) numerosEnteros.get(i) * numerosEnteros.get(i));
+            tamDigitos = valoresCuadrados.get(0).toString().length();
+            String cadenaAux = valoresCuadrados.get(i).toString();
+            if (cadenaAux.length() < tamDigitos) {
+                for (int j = 0; j < (tamDigitos - cadenaAux.length()); j++) {
+                    cadenaAux = "0" + cadenaAux;
+                }
+            }
+            long centro = Long.parseLong(cadenaAux.substring(tam / 2, tam + (tam / 2)));
+            numerosEnteros.add((int) centro);
+            numerosRango.add((float) numerosEnteros.get(i + 1) / (float) (Math.pow(10, tam)));
+        }
+
+        System.out.println("");
+        System.out.println("n         X            X*X            Xn+1             Ri");
+        for (int i = 0; i < n; i++) {
+            System.out.println(i + "   " + numerosEnteros.get(i) + "   " + valoresCuadrados.get(i) + "   " + numerosEnteros.get(i + 1) + "   " + numerosRango.get(i));
+        }
+        
+        datos.add(numerosEnteros);
+        datos.add(valoresCuadrados);
+        datos.add(numerosRango);
+        return datos;
     }
     
+    public ArrayList<ArrayList> productosMedios(int x1, int x2, int n){
+        ArrayList<Integer> numerosEnteros = new ArrayList<>();
+        ArrayList<Float> numerosRango = new ArrayList<>();
+        ArrayList<Long> valoresProductos = new ArrayList<>();
+        ArrayList<ArrayList> datos = new ArrayList();
+        int tamDigitos;
+
+        numerosEnteros.add(x1);
+        numerosEnteros.add(x2);
+
+        int tam = String.valueOf(numerosEnteros.get(0)).length();
+        for (int i = 0; i < n; i++) {
+            valoresProductos.add((long) numerosEnteros.get(i) * numerosEnteros.get(i + 1));
+            tamDigitos = valoresProductos.get(0).toString().length();
+            String cadenaAux = valoresProductos.get(i).toString();
+            int tamAux = cadenaAux.length();
+            if (tamAux < tamDigitos) {
+                for (int j = 0; j < (tamDigitos - tamAux); j++) {
+                    cadenaAux = "0" + cadenaAux;
+                }
+            }
+            long centro = Long.parseLong(cadenaAux.substring(tam / 2, tam + (tam / 2)));
+            numerosEnteros.add((int) centro);
+            numerosRango.add((float) numerosEnteros.get(i + 1) / (float) (Math.pow(10, tam)));
+        }
+
+        System.out.println("");
+        System.out.println("n         Xn            Xn-1*Xn            Xn+1             Ri");
+        for (int i = 0; i < n; i++) {
+            if (i == 0) {
+                System.out.println(i + "   " + numerosEnteros.get(i) + "       NA          " + numerosEnteros.get(i + 1) + "      " + "         NA          ");
+            } else {
+                System.out.println(i + "   " + numerosEnteros.get(i) + "     " + valoresProductos.get(i - 1) + "  " + numerosEnteros.get(i + 1) + "      " + numerosRango.get(i));
+            }
+        }
+        datos.add(numerosEnteros);
+        datos.add(valoresProductos);
+        datos.add(numerosRango);
+        return datos;     
+    } 
+    
+    public ArrayList<ArrayList> genMultiplicadorConstante(int x, int constanteMultiplicativa, int n) {
+        ArrayList<Integer> numerosEnteros = new ArrayList<>();
+        ArrayList<Float> numerosRango = new ArrayList<>();
+        ArrayList<Long> valoresProductos = new ArrayList<>();
+        ArrayList<ArrayList> datos = new ArrayList();
+        int tamDigitos;
+        /*Scanner leer = new Scanner(System.in);
+
+        System.out.println("Cuantos numeros pseudoaleatorios desea ver? ");
+        int n = Integer.parseInt(leer.next());
+
+        int semillaX = 0;
+        int tam = 0;
+
+        do {
+            System.out.println("Valor de la semilla x: ");
+            semillaX = Integer.parseInt(leer.next());
+            tam = String.valueOf(semillaX).length();
+            if (tam <= 3) {
+                System.out.println("ERROR: El número de dígitos de la semilla debe ser mayor a 3.");
+            }
+        } while (tam <= 3);
+
+        
+        
+
+        int tamConst = 0;
+
+        do {
+            System.out.println("Valor del multiplicador constante: ");
+            constanteMultiplicativa = Integer.parseInt(leer.next());
+            tamConst = String.valueOf(constanteMultiplicativa).length();
+            if (tamConst != tam) {
+                System.out.println("ERROR: El número de dígitos de la constante debe ser igual al número de dígitos de la semilla (" + tam + ").");
+            }
+        } while (tamConst != tam);*/
+        
+        numerosEnteros.add(x);
+        
+        int tam = String.valueOf(numerosEnteros.get(0)).length();
+
+        for (int i = 0; i < n; i++) {
+            valoresProductos.add((long) numerosEnteros.get(i) * constanteMultiplicativa);
+            tamDigitos = valoresProductos.get(0).toString().length();
+            String cadenaAux = valoresProductos.get(i).toString();
+            int tamAux = cadenaAux.length();
+            if (tamAux < tamDigitos) {
+                for (int j = 0; j < (tamDigitos - tamAux); j++) {
+                    cadenaAux = "0" + cadenaAux;
+                }
+            }
+            long centro = Long.parseLong(cadenaAux.substring(tam / 2, tam + (tam / 2)));
+            numerosEnteros.add((int) centro);
+            numerosRango.add((float) numerosEnteros.get(i + 1) / (float) (Math.pow(10, tam)));
+        }
+
+        System.out.println("");
+        System.out.println("n         Xn            Xn*a          a             Ri");
+        for (int i = 1; i <= n; i++) {
+            System.out.println(i + "   " + numerosEnteros.get(i) + "     " + valoresProductos.get(i - 1) + "  " + numerosEnteros.get(i) + "      " + numerosRango.get(i - 1));
+        }
+        datos.add(numerosEnteros);
+        datos.add(valoresProductos);
+        datos.add(numerosRango);
+        return datos;
+    }
 }

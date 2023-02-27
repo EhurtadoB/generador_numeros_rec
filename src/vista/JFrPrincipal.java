@@ -40,9 +40,9 @@ public class JFrPrincipal extends javax.swing.JFrame {
         jButtonCongruMixto = new javax.swing.JButton();
         jButtonCongruMultiplicativo = new javax.swing.JButton();
         jButtonFibonacci = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonCuadradosMedios = new javax.swing.JButton();
+        jButtonProductosMedios = new javax.swing.JButton();
+        jButtonMultiplicarConstante = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,14 +78,29 @@ public class JFrPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(204, 255, 255));
-        jButton2.setText("jButton2");
+        jButtonCuadradosMedios.setBackground(new java.awt.Color(204, 255, 255));
+        jButtonCuadradosMedios.setText("Cuadrados Medios");
+        jButtonCuadradosMedios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCuadradosMediosActionPerformed(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(204, 255, 255));
-        jButton3.setText("jButton3");
+        jButtonProductosMedios.setBackground(new java.awt.Color(204, 255, 255));
+        jButtonProductosMedios.setText("Productos Medios");
+        jButtonProductosMedios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProductosMediosActionPerformed(evt);
+            }
+        });
 
-        jButton4.setBackground(new java.awt.Color(204, 255, 255));
-        jButton4.setText("jButton4");
+        jButtonMultiplicarConstante.setBackground(new java.awt.Color(204, 255, 255));
+        jButtonMultiplicarConstante.setText("Multiplicador constante");
+        jButtonMultiplicarConstante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMultiplicarConstanteActionPerformed(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(0, 0, 255));
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
@@ -98,9 +113,9 @@ public class JFrPrincipal extends javax.swing.JFrame {
             .addComponent(jButtonCongruMixto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButtonCongruMultiplicativo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
             .addComponent(jButtonFibonacci, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonCuadradosMedios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonProductosMedios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonMultiplicarConstante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -112,11 +127,11 @@ public class JFrPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButtonFibonacci)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(jButtonCuadradosMedios)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(jButtonProductosMedios)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(jButtonMultiplicarConstante)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
                 .addGap(0, 24, Short.MAX_VALUE))
@@ -187,6 +202,30 @@ public class JFrPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonFibonacciActionPerformed
 
+    private void jButtonCuadradosMediosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCuadradosMediosActionPerformed
+        // TODO add your handling code here:
+        metodo="cuadradosMedios";
+        JFrMostrarResultados mostrar = new JFrMostrarResultados();
+        mostrar.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCuadradosMediosActionPerformed
+
+    private void jButtonProductosMediosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProductosMediosActionPerformed
+        // TODO add your handling code here:
+        metodo = "productosMedios";
+        JFrMostrarResultados mostrar = new JFrMostrarResultados();
+        mostrar.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonProductosMediosActionPerformed
+
+    private void jButtonMultiplicarConstanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMultiplicarConstanteActionPerformed
+        // TODO add your handling code here:
+        metodo = "multiplicarConstante";
+        JFrMostrarResultados mostrar = new JFrMostrarResultados();
+        mostrar.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonMultiplicarConstanteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -223,13 +262,13 @@ public class JFrPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonCongruMixto;
     private javax.swing.JButton jButtonCongruMultiplicativo;
+    private javax.swing.JButton jButtonCuadradosMedios;
     private javax.swing.JButton jButtonFibonacci;
+    private javax.swing.JButton jButtonMultiplicarConstante;
+    private javax.swing.JButton jButtonProductosMedios;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -28,6 +28,7 @@ public class JFrMostrarResultados extends javax.swing.JFrame {
         modelo = new DefaultTableModel();
         Generador generador = new Generador();
         ArrayList<Integer> numerosEnteros = new ArrayList<>();
+        ArrayList<ArrayList> datos = new ArrayList<>();
 
         if (metodo.equalsIgnoreCase("mixto")) {
             String[] titulo = new String[]{"n", "Xo", "a", "c", "m"};
@@ -117,6 +118,96 @@ public class JFrMostrarResultados extends javax.swing.JFrame {
                 modelo.addRow(info);
             }
         }
+        if (metodo.equalsIgnoreCase("cuadradosMedios")) {
+            String[] titulo = new String[]{"n", "Xn", "Xn*Xn", "Xn+1", "Rango"};
+            modelo.setColumnIdentifiers(titulo);
+            jTableResultados.setModel(modelo);
+
+            int x = -1, n = -1;
+            do {
+
+                x = Integer.parseInt(JOptionPane.showInputDialog("Valor para la semilla X0: "));
+                n = Integer.parseInt(JOptionPane.showInputDialog("Cuantos valores desea ver: "));
+
+            } while (x < 0 && n < 0);
+
+            datos = generador.cuadradosMedios(x, n);
+
+            String[] info = new String[datos.get(0).size()];
+            for (int i = 0; i < n; i++) {
+                info[0] = Integer.toString(i);
+                info[1] = datos.get(0).get(i).toString();
+                info[2] = datos.get(1).get(i).toString();
+                info[3] = datos.get(0).get(i + 1).toString();
+                info[4] = datos.get(2).get(i).toString();
+                modelo.addRow(info);
+            }
+        }
+        if (metodo.equalsIgnoreCase("productosMedios")) {
+            String[] titulo = new String[]{"n", "Xn", "Xn-1*Xn", "Xn+1", "Rango"};
+            modelo.setColumnIdentifiers(titulo);
+            jTableResultados.setModel(modelo);
+
+            int x1 = -1, n = -1, x2 = -1;
+            do {
+
+                x1 = Integer.parseInt(JOptionPane.showInputDialog("Valor para la semilla X0: "));
+                x2 = Integer.parseInt(JOptionPane.showInputDialog("Valor para la semilla X1: "));
+                n = Integer.parseInt(JOptionPane.showInputDialog("Cuantos valores desea ver: "));
+
+            } while (x1 < 0 && n < 0 && x2 < 0);
+
+            datos = generador.productosMedios(x1, x2, n);
+
+            String[] info = new String[datos.get(0).size()];
+            for (int i = 0; i < n; i++) {
+                info[0] = Integer.toString(i);
+                if (i == 0) {
+                    info[1] = datos.get(0).get(i).toString();
+                    info[2] = "";
+                    info[3] = datos.get(0).get(i + 1).toString();
+                    info[4] = "";
+                } else {
+                    info[1] = datos.get(0).get(i).toString();
+                    info[2] = datos.get(1).get(i - 1).toString();
+                    info[3] = datos.get(0).get(i + 1).toString();
+                    info[4] = datos.get(2).get(i).toString();
+                }
+                modelo.addRow(info);
+            }
+        }
+        if (metodo.equalsIgnoreCase("multiplicarConstante")) {
+            String[] titulo = new String[]{"n", "Xn", "a", "Xn*a", "Xn+1", "Rango"};
+            modelo.setColumnIdentifiers(titulo);
+            jTableResultados.setModel(modelo);
+
+            int x = -1, n = -1, a = -1;
+            do {
+
+                x = Integer.parseInt(JOptionPane.showInputDialog("Valor para la semilla X: "));
+                a = Integer.parseInt(JOptionPane.showInputDialog("Valor para la constante multiplicativa: "));
+                n = Integer.parseInt(JOptionPane.showInputDialog("Cuantos valores desea ver: "));
+
+            } while (x < 0 && n < 0 && a < 0);
+
+            datos = generador.genMultiplicadorConstante(x, a, n);
+
+            String[] info = new String[datos.get(0).size()];
+            for (int i = 0; i < n; i++) {
+                info[0] = Integer.toString(i);
+                info[1] = datos.get(0).get(i).toString();
+                info[3] = datos.get(1).get(i).toString();
+                info[4] = datos.get(0).get(i+1).toString();
+                info[5] = datos.get(2).get(i).toString();
+                if(i!=0){
+                    info[2] = "";
+                }else{
+                    info[2] = Integer.toString(a);
+                }
+
+                modelo.addRow(info);
+            }
+        }
     }
 
     /**
@@ -155,15 +246,15 @@ public class JFrMostrarResultados extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,7 +267,9 @@ public class JFrMostrarResultados extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
