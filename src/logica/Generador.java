@@ -15,11 +15,12 @@ import java.util.Scanner;
  */
 public class Generador {
 
-    public ArrayList<Integer> genCongruencialMixto(int x, int a, int c, int m) {
+    public ArrayList<ArrayList> genCongruencialMixto(int x, int a, int c, int m) {
 
         ArrayList<Integer> numerosEnteros = new ArrayList<>();
         ArrayList<Float> numerosRango = new ArrayList<>();
         ArrayList<Integer> numA = new ArrayList<>();
+        ArrayList<ArrayList> datos = new ArrayList();
 
         numA.add(a);
         numerosEnteros.add(x);
@@ -30,16 +31,23 @@ public class Generador {
         for (int i = 0; i < numerosEnteros.size(); i++) {
             System.out.println(numA.get(i) + "|" + numerosEnteros.get(i));
         }
-        return numerosEnteros;
+        for(int i=0; i<numerosEnteros.size(); i++){
+            numerosRango.add((float) numerosEnteros.get(i)/m);
+        }
+        datos.add(numerosEnteros);
+        datos.add(numerosRango);
+        return datos;
 
     }
 
     //Generador Congruencial Multiplicativo
-    public ArrayList<Integer> genConMultiplicativo(int x, int a, int m) {
+    public ArrayList<ArrayList> genConMultiplicativo(int x, int a, int m) {
 
         //Se crean las listas de los "x" generados y "a" generados
         ArrayList<Integer> xGenerados = new ArrayList<>();
         ArrayList<Integer> aGenerados = new ArrayList<>();
+        ArrayList<Float> numerosRango = new ArrayList<>();
+        ArrayList<ArrayList> datos = new ArrayList();
 
         //Se añaden las primeras "x" y "a" a las listas
         xGenerados.add(x);
@@ -49,6 +57,10 @@ public class Generador {
         for (int i = 0; i < m - 1; i++) {
             aGenerados.add(xGenerados.get(i) * a);
             xGenerados.add(aGenerados.get(i + 1) % m);
+            
+        }
+        for(int i=0; i<xGenerados.size(); i++){
+            numerosRango.add((float) xGenerados.get(i)/m);
         }
 
         //Se imprimen los números "x" pseudoaleatorios generados
@@ -78,7 +90,10 @@ public class Generador {
         if (x < 0 || a < 0 || m < 0) {
             System.out.println("Los números digitados no deben ser negativos.");
         }
-        return xGenerados;
+        datos.add(xGenerados);
+        datos.add(numerosRango);
+        return datos;
+        
     }
 
     //Función para saber si un número es primo
@@ -100,9 +115,10 @@ public class Generador {
     }
 
     //Metodo fibonacci
-    public ArrayList<Integer> fibonacci(int x1, int x2, int m) {
+    public ArrayList<ArrayList> fibonacci(int x1, int x2, int m) {
         ArrayList<Integer> numerosEnteros = new ArrayList<>();
         ArrayList<Float> numerosRango = new ArrayList<>();
+        ArrayList<ArrayList> datos = new ArrayList();
 
         numerosEnteros.add(x1);
         numerosEnteros.add(x2);
@@ -116,7 +132,7 @@ public class Generador {
         }
 
         for (int i = 0; i < m; i++) {
-            numerosRango.add(Float.parseFloat((float) numerosEnteros.get(i) / m + ""));
+            numerosRango.add((float) numerosEnteros.get(i) / m);
         }
 
         System.out.println("");
@@ -125,7 +141,9 @@ public class Generador {
         for (int i = 0; i < m; i++) {
             System.out.println(i + "  " + numerosEnteros.get(i) + " en el rango de 0 a 1 es " + numerosRango.get(i));
         }
-        return numerosEnteros;
+        datos.add(numerosEnteros);
+        datos.add(numerosRango);
+        return datos;
     }
 
     public ArrayList<ArrayList> cuadradosMedios(int x1, int n) {
@@ -143,8 +161,9 @@ public class Generador {
             valoresCuadrados.add((long) numerosEnteros.get(i) * numerosEnteros.get(i));
             tamDigitos = valoresCuadrados.get(0).toString().length();
             String cadenaAux = valoresCuadrados.get(i).toString();
-            if (cadenaAux.length() < tamDigitos) {
-                for (int j = 0; j < (tamDigitos - cadenaAux.length()); j++) {
+            int tamAux = cadenaAux.length();
+            if (tamAux < tamDigitos) {
+                for (int j = 0; j < (tamDigitos - tamAux); j++) {
                     cadenaAux = "0" + cadenaAux;
                 }
             }
