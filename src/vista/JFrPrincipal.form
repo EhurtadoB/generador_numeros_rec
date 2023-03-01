@@ -98,7 +98,7 @@
                   <Component id="jButtonCuadradosMedios" alignment="0" max="32767" attributes="0"/>
                   <Component id="jButtonProductosMedios" alignment="0" max="32767" attributes="0"/>
                   <Component id="jButtonMultiplicarConstante" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jButton5" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jButtonCreditos" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -116,7 +116,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonMultiplicarConstante" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonCreditos" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -189,7 +189,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMultiplicarConstanteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="jButtonCreditos">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="0" red="0" type="rgb"/>
@@ -197,8 +197,11 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="jButton5"/>
+                <Property name="text" type="java.lang.String" value="Creditos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCreditosActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

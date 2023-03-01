@@ -43,7 +43,7 @@ public class JFrPrincipal extends javax.swing.JFrame {
         jButtonCuadradosMedios = new javax.swing.JButton();
         jButtonProductosMedios = new javax.swing.JButton();
         jButtonMultiplicarConstante = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButtonCreditos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,9 +102,14 @@ public class JFrPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(0, 0, 255));
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("jButton5");
+        jButtonCreditos.setBackground(new java.awt.Color(0, 0, 255));
+        jButtonCreditos.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonCreditos.setText("Creditos");
+        jButtonCreditos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreditosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,7 +121,7 @@ public class JFrPrincipal extends javax.swing.JFrame {
             .addComponent(jButtonCuadradosMedios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButtonProductosMedios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButtonMultiplicarConstante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonCreditos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +138,7 @@ public class JFrPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButtonMultiplicarConstante)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(jButtonCreditos)
                 .addGap(0, 24, Short.MAX_VALUE))
         );
 
@@ -226,6 +231,13 @@ public class JFrPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonMultiplicarConstanteActionPerformed
 
+    private void jButtonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreditosActionPerformed
+        // TODO add your handling code here:
+        JFrCreditos creditos = new JFrCreditos();
+        creditos.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCreditosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -262,9 +274,9 @@ public class JFrPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonCongruMixto;
     private javax.swing.JButton jButtonCongruMultiplicativo;
+    private javax.swing.JButton jButtonCreditos;
     private javax.swing.JButton jButtonCuadradosMedios;
     private javax.swing.JButton jButtonFibonacci;
     private javax.swing.JButton jButtonMultiplicarConstante;
