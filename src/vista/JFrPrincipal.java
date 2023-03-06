@@ -5,8 +5,13 @@
  */
 package vista;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.Generador;
+import logica.MetodosExcel;
+import logica.PruebasEstadisticas;
 
 /**
  *
@@ -18,10 +23,13 @@ public class JFrPrincipal extends javax.swing.JFrame {
      * Creates new form JFrPrincipal
      */
     static String metodo;
+    static String[][] tablaMatriz;
     
     public JFrPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        PruebasEstadisticas prueba = new PruebasEstadisticas();
+        prueba.pruebaPromedios();
         
     }
 
@@ -44,8 +52,10 @@ public class JFrPrincipal extends javax.swing.JFrame {
         jButtonProductosMedios = new javax.swing.JButton();
         jButtonMultiplicarConstante = new javax.swing.JButton();
         jButtonCreditos = new javax.swing.JButton();
+        jButtonImportar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
@@ -111,6 +121,14 @@ public class JFrPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButtonImportar.setBackground(new java.awt.Color(204, 255, 255));
+        jButtonImportar.setText("Importar excel para pruebas");
+        jButtonImportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -122,6 +140,7 @@ public class JFrPrincipal extends javax.swing.JFrame {
             .addComponent(jButtonProductosMedios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButtonMultiplicarConstante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButtonCreditos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonImportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,8 +157,10 @@ public class JFrPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButtonMultiplicarConstante)
                 .addGap(18, 18, 18)
+                .addComponent(jButtonImportar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jButtonCreditos)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -162,8 +183,8 @@ public class JFrPrincipal extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabelTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,9 +195,7 @@ public class JFrPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -238,6 +257,26 @@ public class JFrPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCreditosActionPerformed
 
+    private void jButtonImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportarActionPerformed
+        // TODO add your handling code here:
+        MetodosExcel importar = new MetodosExcel();
+        try {
+            tablaMatriz = importar.valoresExcel();
+        } catch (IOException ex) {
+            Logger.getLogger(JFrPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(tablaMatriz!=null){
+            JFrPruebasEstadisticas pruebas = new JFrPruebasEstadisticas();
+            
+            System.out.println(tablaMatriz.length);
+            System.out.println(tablaMatriz[0].length);
+            
+            pruebas.setVisible(true);
+            this.setVisible(false);
+        }
+        
+    }//GEN-LAST:event_jButtonImportarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -279,6 +318,7 @@ public class JFrPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCreditos;
     private javax.swing.JButton jButtonCuadradosMedios;
     private javax.swing.JButton jButtonFibonacci;
+    private javax.swing.JButton jButtonImportar;
     private javax.swing.JButton jButtonMultiplicarConstante;
     private javax.swing.JButton jButtonProductosMedios;
     private javax.swing.JLabel jLabelTitulo;
