@@ -51,6 +51,7 @@ public class JFrResultadoTabla extends javax.swing.JFrame {
             modelo.addRow(mostrar);
         }
         
+        System.out.println(PruebasEstadisticas.cont);
 
     }
 

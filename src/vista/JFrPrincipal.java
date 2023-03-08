@@ -12,6 +12,12 @@ import javax.swing.JOptionPane;
 import logica.Generador;
 import logica.MetodosExcel;
 import logica.PruebasEstadisticas;
+import static logica.PruebasEstadisticas.cont;
+import static vista.JFrPruebasEstadisticas.prueba1;
+import static vista.JFrPruebasEstadisticas.prueba2;
+import static vista.JFrPruebasEstadisticas.prueba3;
+import static vista.JFrPruebasEstadisticas.prueba4;
+import static vista.JFrPruebasEstadisticas.prueba5;
 
 /**
  *
@@ -29,7 +35,12 @@ public class JFrPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         PruebasEstadisticas prueba = new PruebasEstadisticas();
-      
+        prueba1=0;
+        prueba2=0;
+        prueba3=0;
+        prueba4=0;
+        prueba5=0;
+        cont=0; 
         
     }
 

@@ -9,9 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.MetodosExcel;
 import logica.PruebasEstadisticas;
+import static logica.PruebasEstadisticas.cont;
 import static vista.JFrPrincipal.tablaMatriz;
 
 /**
@@ -26,7 +28,12 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
     DefaultTableModel modelo;
     MetodosExcel metodoExcel = new MetodosExcel();
     PruebasEstadisticas prueba = new PruebasEstadisticas();
-
+    public static int prueba1; 
+    public static int prueba2;
+    public static int prueba3;
+    public static int prueba4;
+    public static int prueba5;
+    
     public JFrPruebasEstadisticas() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -71,7 +78,7 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButtonFrecuencias = new javax.swing.JButton();
         jButtonKolmogorov = new javax.swing.JButton();
-        jButtonSeries = new javax.swing.JButton();
+        jButtonDistancia = new javax.swing.JButton();
         jButtonPoker = new javax.swing.JButton();
         jButtonRegresar = new javax.swing.JButton();
 
@@ -125,13 +132,23 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
             }
         });
 
-        jButtonSeries.setBackground(new java.awt.Color(204, 255, 255));
-        jButtonSeries.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButtonSeries.setText("Series");
+        jButtonDistancia.setBackground(new java.awt.Color(204, 255, 255));
+        jButtonDistancia.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButtonDistancia.setText("Distancia");
+        jButtonDistancia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDistanciaActionPerformed(evt);
+            }
+        });
 
         jButtonPoker.setBackground(new java.awt.Color(204, 255, 255));
         jButtonPoker.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonPoker.setText("Poker");
+        jButtonPoker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPokerActionPerformed(evt);
+            }
+        });
 
         jButtonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/icons8-gira-a-la-izquierda-48.png"))); // NOI18N
         jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +178,7 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
                         .addComponent(jButtonKolmogorov, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButtonSeries, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButtonDistancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButtonPoker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -183,7 +200,7 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jButtonKolmogorov)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonSeries)
+                .addComponent(jButtonDistancia)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonPoker)
                 .addGap(18, 18, 18)
@@ -233,7 +250,8 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
         JFrPrincipal principal = new JFrPrincipal();
         principal.setVisible(true);
         this.setVisible(false);
-
+        
+        
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jButtonPromediosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPromediosActionPerformed
@@ -246,7 +264,14 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
         }
         System.out.println(numeros);
         prueba.pruebaPromedios(numeros);
+        System.out.println(PruebasEstadisticas.cont);
+        prueba1=1;
         
+        if(cont>=3){
+            JOptionPane.showMessageDialog(null, "Paso 3 pruebas\n"
+                    + "No se puede rechazar la hipótesis de que los números\n"
+                    + "cumplen una función de distribución uniforme");
+        }
     }//GEN-LAST:event_jButtonPromediosActionPerformed
 
     private void jButtonFrecuenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFrecuenciasActionPerformed
@@ -259,16 +284,70 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
         }
         System.out.println(numeros);
         prueba.pruebaFrecuencias(numeros);
+        prueba2=1;
+        
+        if(cont>=3){
+            JOptionPane.showMessageDialog(null, "Paso 3 pruebas\n"
+                    + "No se puede rechazar la hipótesis de que los números\n"
+                    + "cumplen una función de distribución uniforme");
+        }
     }//GEN-LAST:event_jButtonFrecuenciasActionPerformed
 
     private void jButtonKolmogorovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKolmogorovActionPerformed
         // TODO add your handling code here:
-
+        
         JFrResultadoTabla result = new JFrResultadoTabla();
         result.setVisible(true);
         this.setVisible(false);
+        prueba3=1;
+        
+        if(cont>=3){
+            JOptionPane.showMessageDialog(null, "Paso 3 pruebas\n"
+                    + "No se puede rechazar la hipótesis de que los números\n"
+                    + "cumplen una función de distribución uniforme");
+        }
         
     }//GEN-LAST:event_jButtonKolmogorovActionPerformed
+
+    private void jButtonPokerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPokerActionPerformed
+        // TODO add your handling code here:
+       ArrayList<Float> numeros = new ArrayList();
+        try {
+            numeros = metodoExcel.columnaNecesaria(tablaMatriz, "r");
+        } catch (IOException ex) {
+            Logger.getLogger(JFrPruebasEstadisticas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(numeros);
+        prueba.pruebaPoker(numeros);
+        prueba4=1;
+        
+        if(cont>=3){
+            JOptionPane.showMessageDialog(null, "Paso 3 pruebas\n"
+                    + "No se puede rechazar la hipótesis de que los números\n"
+                    + "cumplen una función de distribución uniforme");
+        }
+        System.out.println(cont);
+    }//GEN-LAST:event_jButtonPokerActionPerformed
+
+    private void jButtonDistanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDistanciaActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Float> numeros = new ArrayList();
+        try {
+            numeros = metodoExcel.columnaNecesaria(tablaMatriz, "r");
+        } catch (IOException ex) {
+            Logger.getLogger(JFrPruebasEstadisticas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(numeros);
+        prueba.pruebaHuecos(numeros);
+        prueba5=1;
+        
+        if(cont>=3){
+            JOptionPane.showMessageDialog(null, "Paso 3 pruebas\n"
+                    + "No se puede rechazar la hipótesis de que los números\n"
+                    + "cumplen una función de distribución uniforme");
+        }
+        System.out.println(cont);
+    }//GEN-LAST:event_jButtonDistanciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,12 +385,12 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonDistancia;
     private javax.swing.JButton jButtonFrecuencias;
     private javax.swing.JButton jButtonKolmogorov;
     private javax.swing.JButton jButtonPoker;
     private javax.swing.JButton jButtonPromedios;
     private javax.swing.JButton jButtonRegresar;
-    private javax.swing.JButton jButtonSeries;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
