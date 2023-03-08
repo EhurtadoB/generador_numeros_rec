@@ -29,7 +29,7 @@ public class JFrPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         PruebasEstadisticas prueba = new PruebasEstadisticas();
-        prueba.pruebaPromedios();
+      
         
     }
 

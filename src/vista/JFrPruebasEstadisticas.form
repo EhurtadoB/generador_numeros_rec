@@ -171,6 +171,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Promedios"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPromediosActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -190,6 +193,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Frecuencias"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFrecuenciasActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonKolmogorov">
               <Properties>
@@ -201,6 +207,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Kolmogorov-Smirnov"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonKolmogorovActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonSeries">
               <Properties>

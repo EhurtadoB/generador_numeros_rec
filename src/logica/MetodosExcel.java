@@ -10,6 +10,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -164,5 +166,40 @@ public class MetodosExcel {
         // Retornamos la matríz traspuesta
         return datatableT;
 
+    }
+
+    public ArrayList<Float> columnaNecesaria(String[][] tabla, String columna) throws IOException {
+
+        // Variable para determinar la posición del valor que vamos a utilizar para el test
+        int posR = 0;
+
+        // Cuando encuentre la referencia en los índices guarda la posición
+        for (int i = 0; i < tabla.length; i++) {
+            if (tabla[i][0] == null ? columna == null : tabla[i][0].equals(columna)) {
+                posR = i;
+            }
+        }
+
+        // Creamos ArrayList para guardar la columna
+        ArrayList<String> listaR = new ArrayList<>();
+
+        // Añadimos al ArrayList cada valor de la columna donde se encontró la r
+        listaR.addAll(Arrays.asList(tabla[posR]));
+
+        // Borramos el caracter del título para quedarnos solo con datos numéricos
+        listaR.remove(0);
+
+        // Creamos un ArrayList para guardar los datos transformados en float
+        ArrayList<Float> listaNumR = new ArrayList<>();
+
+        // Si la posición no guarda un vacío, transformamos lo guardado en
+        // float y se añade al nuevo ArrayList de números float
+        for (int i = 0; i < listaR.size(); i++) {
+            if (!"".equals(listaR.get(i))) {
+                listaNumR.add(Float.valueOf(listaR.get(i)));
+            }
+        }
+
+        return listaNumR;
     }
 }

@@ -5,7 +5,13 @@
  */
 package vista;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import logica.MetodosExcel;
+import logica.PruebasEstadisticas;
 import static vista.JFrPrincipal.tablaMatriz;
 
 /**
@@ -18,6 +24,8 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
      * Creates new form JFrPruebasEstadisticas
      */
     DefaultTableModel modelo;
+    MetodosExcel metodoExcel = new MetodosExcel();
+    PruebasEstadisticas prueba = new PruebasEstadisticas();
 
     public JFrPruebasEstadisticas() {
         initComponents();
@@ -90,6 +98,11 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
         jButtonPromedios.setBackground(new java.awt.Color(204, 255, 255));
         jButtonPromedios.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonPromedios.setText("Promedios");
+        jButtonPromedios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPromediosActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Pruebas");
@@ -97,10 +110,20 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
         jButtonFrecuencias.setBackground(new java.awt.Color(204, 255, 255));
         jButtonFrecuencias.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonFrecuencias.setText("Frecuencias");
+        jButtonFrecuencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFrecuenciasActionPerformed(evt);
+            }
+        });
 
         jButtonKolmogorov.setBackground(new java.awt.Color(204, 255, 255));
         jButtonKolmogorov.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonKolmogorov.setText("Kolmogorov-Smirnov");
+        jButtonKolmogorov.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonKolmogorovActionPerformed(evt);
+            }
+        });
 
         jButtonSeries.setBackground(new java.awt.Color(204, 255, 255));
         jButtonSeries.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -212,6 +235,40 @@ public class JFrPruebasEstadisticas extends javax.swing.JFrame {
         this.setVisible(false);
 
     }//GEN-LAST:event_jButtonRegresarActionPerformed
+
+    private void jButtonPromediosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPromediosActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Float> numeros = new ArrayList();
+        try {
+            numeros = metodoExcel.columnaNecesaria(tablaMatriz, "r");
+        } catch (IOException ex) {
+            Logger.getLogger(JFrPruebasEstadisticas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(numeros);
+        prueba.pruebaPromedios(numeros);
+        
+    }//GEN-LAST:event_jButtonPromediosActionPerformed
+
+    private void jButtonFrecuenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFrecuenciasActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Float> numeros = new ArrayList();
+        try {
+            numeros = metodoExcel.columnaNecesaria(tablaMatriz, "r");
+        } catch (IOException ex) {
+            Logger.getLogger(JFrPruebasEstadisticas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(numeros);
+        prueba.pruebaFrecuencias(numeros);
+    }//GEN-LAST:event_jButtonFrecuenciasActionPerformed
+
+    private void jButtonKolmogorovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKolmogorovActionPerformed
+        // TODO add your handling code here:
+
+        JFrResultadoTabla result = new JFrResultadoTabla();
+        result.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_jButtonKolmogorovActionPerformed
 
     /**
      * @param args the command line arguments
