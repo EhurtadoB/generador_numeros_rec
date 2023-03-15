@@ -279,28 +279,98 @@ public class PruebasEstadisticas {
         return chicuadra;
     }
 
+    public double distReferencia(int n) {
+        double chicuadra;
+
+        switch (n) {
+            case 1:
+                chicuadra = 0.975;
+                break;
+            case 2:
+                chicuadra = 0.842;
+                break;
+            case 3:
+                chicuadra = 0.708;
+                break;
+            case 4:
+                chicuadra = 0.624;
+                break;
+            case 5:
+                chicuadra = 0.563;
+                break;
+            case 6:
+                chicuadra = 0.521;
+                break;
+            case 7:
+                chicuadra = 0.486;
+                break;
+            case 8:
+                chicuadra = 0.457;
+                break;
+            case 9:
+                chicuadra = 0.432;
+                break;
+            case 10:
+                chicuadra = 0.409;
+                break;
+            case 11:
+                chicuadra = 0.391;
+                break;
+            case 12:
+                chicuadra = 0.375;
+                break;
+            case 13:
+                chicuadra = 0.361;
+                break;
+            case 14:
+                chicuadra = 0.349;
+                break;
+            case 15:
+                chicuadra = 0.338;
+                break;
+            case 16:
+                chicuadra = 0.328;
+                break;
+            case 17:
+                chicuadra = 0.318;
+                break;
+            case 18:
+                chicuadra = 0.309;
+                break;
+            case 19:
+                chicuadra = 0.301;
+                break;
+            case 20:
+                chicuadra = 0.294;
+                break;
+            default:
+                chicuadra = 1.36 / Math.sqrt(n);
+                break;
+        }
+        return chicuadra;
+    }
+
     public ArrayList<ArrayList> pruebaColmogorov(ArrayList<Float> datos) {
         Collections.sort(datos);
         ArrayList<ArrayList> info = new ArrayList();
         ArrayList<Float> fObservadas = new ArrayList();
         ArrayList<Float> distancias = new ArrayList();
         float dnMax;
-        ArrayList<Float> AuxDistancia = new ArrayList();
 
-        double ZReferencia = chiCuadrado(datos.size());
+        double ZReferencia = distReferencia(datos.size());
 
         for (int i = 0; i < datos.size(); i++) {
             fObservadas.add((float) (i + 1) / datos.size());
             distancias.add(Math.abs(fObservadas.get(i) - datos.get(i)));
         }
 
-        AuxDistancia = distancias;
+        ArrayList<Float> AuxDistancia = new ArrayList(distancias);
         Collections.sort(distancias);
 
         dnMax = distancias.get(distancias.size() - 1);
 
         for (int i = 0; i < datos.size(); i++) {
-            System.out.println(i + "  " + datos.get(i) + "   " + fObservadas.get(i) + "   " + distancias.get(i));
+            System.out.println(i + "  " + datos.get(i) + "   " + fObservadas.get(i) + "   " + AuxDistancia.get(i));
         }
 
         System.out.println("MAX = " + dnMax);
@@ -323,7 +393,7 @@ public class PruebasEstadisticas {
 
         info.add(datos);
         info.add(fObservadas);
-        info.add(distancias);
+        info.add(AuxDistancia);
 
         return info;
     }
@@ -666,8 +736,8 @@ public class PruebasEstadisticas {
                 || (!dig3.equals(dig1) && !dig3.equals(dig2) && !dig3.equals(dig4) && dig2.equals(dig5))
                 || (!dig4.equals(dig1) && !dig4.equals(dig2) && !dig4.equals(dig3) && dig4.equals(dig5)));
     }
-    
-    public void pruebaHuecos(ArrayList<Float> listaNumR){
+
+    public void pruebaHuecos(ArrayList<Float> listaNumR) {
 
         // Definimos el intervalo
         float alfa = 0.3f, beta = 0.7f;
@@ -745,9 +815,14 @@ public class PruebasEstadisticas {
                         cantRep.add(auxCantHuecos + 1);
                     }
                 }
+                if (auxCantHuecos == 0) {
+                    cantRep.add(auxCantHuecos);
+                }
             }
         }
-        
+
+        System.out.println("repetidos: " + cantRep.size());
+        System.out.println("repetidos: " + datosEvaluados.size());
         int[] auxCantRep = new int[datosEvaluados.size()];
         for (int i = 0; i < datosEvaluados.size(); i++) {
             for (int j = 0; j < datosEvaluados.size() - 1; j++) {
@@ -768,44 +843,41 @@ public class PruebasEstadisticas {
         double F_Esperada = 0, sumF_Esperada = 0;
 
         ArrayList<Double> F_Esperadas = new ArrayList<>();
-        
 
-        
         for (int i = 0; i < datosEvaluados.size(); i++) {
             F_Esperada = numHuecos * (beta - alfa) * Math.pow((1 - (beta - alfa)), datosEvaluados.get(i));
             F_Esperadas.add(F_Esperada);
             sumF_Esperada = sumF_Esperada + F_Esperada;
         }
-        
+
         double chiCuadrado = 0;
         ArrayList<Double> sumChiCuadrado = new ArrayList<>();
         for (int i = 0; i < datosEvaluados.size(); i++) {
             sumChiCuadrado.add((double) Math.pow((F_Esperadas.get(i) - auxCantRep[i]), 2) / F_Esperadas.get(i));
             chiCuadrado += sumChiCuadrado.get(i);
         }
-        
+
         System.out.println("");
         String mensaje = "";
         for (int i = 0; i < datosEvaluados.size(); i++) {
             System.out.println("Para " + datosEvaluados.get(i) + ", O = " + auxCantRep[i] + ", E = " + F_Esperadas.get(i) + " Chi Cuadrado = " + sumChiCuadrado.get(i));
-            mensaje +="Para " + datosEvaluados.get(i) + ", O = " + auxCantRep[i] + ", E = " + F_Esperadas.get(i) + " Chi Cuadrado = " + sumChiCuadrado.get(i)+"\n";
+            mensaje += "Para " + datosEvaluados.get(i) + ", O = " + auxCantRep[i] + ", E = " + F_Esperadas.get(i) + " Chi Cuadrado = " + sumChiCuadrado.get(i) + "\n";
         }
-        
-        
+
         System.out.println("Acumulado: " + chiCuadrado);
-        double chi = chiCuadrado(datosEvaluados.size()-1);
+        double chi = chiCuadrado(datosEvaluados.size() - 1);
         if (chiCuadrado < chi) {
-            JOptionPane.showMessageDialog(null, mensaje +"\n"+"Chi cuadrado acumulado = " + chiCuadrado + "\n"
-                        + "Como " + chiCuadrado + " < "+ chi +" entonces PASÓ LA PRUEBA");
-            
-                if (prueba5 != 1) {
-                    cont++;
-                }
+            JOptionPane.showMessageDialog(null, mensaje + "\n" + "Chi cuadrado acumulado = " + chiCuadrado + "\n"
+                    + "Como " + chiCuadrado + " < " + chi + " entonces PASÓ LA PRUEBA");
+
+            if (prueba5 != 1) {
+                cont++;
+            }
             System.out.println("Pasó la prueba");
-            
-        }else{
-            JOptionPane.showMessageDialog(null, mensaje +"\n"+"Chi cuadrado acumulado = " + chiCuadrado + "\n"
-                        + "Como " + chiCuadrado + " > "+ chi +" entonces NO PASÓ LA PRUEBA");
+
+        } else {
+            JOptionPane.showMessageDialog(null, mensaje + "\n" + "Chi cuadrado acumulado = " + chiCuadrado + "\n"
+                    + "Como " + chiCuadrado + " > " + chi + " entonces NO PASÓ LA PRUEBA");
             System.out.println("No pasó la prueba");
         }
     }
