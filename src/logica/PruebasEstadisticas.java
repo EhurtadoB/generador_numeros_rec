@@ -700,7 +700,12 @@ public class PruebasEstadisticas {
     }
 
     public boolean isFull(String dig1, String dig2, String dig3, String dig4, String dig5) {
-        return (isTercia(dig1, dig2, dig3, dig4, dig5) && isPar(dig1, dig2, dig3, dig4, dig5));
+        return ((dig1.equals(dig2) && dig1.equals(dig3) && dig4.equals(dig5))
+                || (dig1.equals(dig2) && dig3.equals(dig5) && dig1.equals(dig4))
+                || (dig1.equals(dig2) && dig3.equals(dig4) && dig1.equals(dig5))
+                || (dig2.equals(dig5) && dig1.equals(dig3) && dig1.equals(dig4))
+                || (dig2.equals(dig4) && dig1.equals(dig3) && dig1.equals(dig5))
+                || (dig2.equals(dig3) && dig1.equals(dig4) && dig1.equals(dig5)));
     }
 
     public boolean isTercia(String dig1, String dig2, String dig3, String dig4, String dig5) {
@@ -709,7 +714,31 @@ public class PruebasEstadisticas {
                 || (dig1.equals(dig2) && !dig1.equals(dig3) && !dig1.equals(dig4) && dig1.equals(dig5))
                 || (!dig1.equals(dig2) && dig1.equals(dig3) && dig1.equals(dig4) && !dig1.equals(dig5))
                 || (!dig1.equals(dig2) && dig1.equals(dig3) && !dig1.equals(dig4) && dig1.equals(dig5))
-                || (!dig1.equals(dig2) && !dig1.equals(dig3) && dig1.equals(dig4) && dig1.equals(dig5)));
+                || (!dig1.equals(dig2) && !dig1.equals(dig3) && dig1.equals(dig4) && dig1.equals(dig5))
+                || (dig2.equals(dig1) && dig2.equals(dig3) && !dig2.equals(dig4) && !dig2.equals(dig5))
+                || (dig2.equals(dig1) && !dig2.equals(dig3) && dig2.equals(dig4) && !dig2.equals(dig5))
+                || (dig2.equals(dig1) && !dig2.equals(dig3) && !dig2.equals(dig4) && dig2.equals(dig5))
+                || (!dig2.equals(dig1) && dig2.equals(dig3) && dig2.equals(dig4) && !dig2.equals(dig5))
+                || (!dig2.equals(dig1) && dig2.equals(dig3) && !dig2.equals(dig4) && dig2.equals(dig5))
+                || (!dig2.equals(dig1) && !dig2.equals(dig3) && dig2.equals(dig4) && dig2.equals(dig5))
+                || (dig3.equals(dig2) && dig3.equals(dig1) && !dig3.equals(dig4) && !dig3.equals(dig5))
+                || (dig3.equals(dig2) && !dig3.equals(dig1) && dig3.equals(dig4) && !dig3.equals(dig5))
+                || (dig3.equals(dig2) && !dig3.equals(dig1) && !dig3.equals(dig4) && dig3.equals(dig5))
+                || (!dig3.equals(dig2) && dig3.equals(dig1) && dig3.equals(dig4) && !dig3.equals(dig5))
+                || (!dig3.equals(dig2) && dig3.equals(dig1) && !dig3.equals(dig4) && dig3.equals(dig5))
+                || (!dig3.equals(dig2) && !dig3.equals(dig1) && dig3.equals(dig4) && dig3.equals(dig5))
+                || (dig4.equals(dig2) && dig4.equals(dig3) && !dig4.equals(dig1) && !dig4.equals(dig5))
+                || (dig4.equals(dig2) && !dig4.equals(dig3) && dig4.equals(dig1) && !dig4.equals(dig5))
+                || (dig4.equals(dig2) && !dig4.equals(dig3) && !dig4.equals(dig1) && dig4.equals(dig5))
+                || (!dig4.equals(dig2) && dig4.equals(dig3) && dig4.equals(dig1) && !dig4.equals(dig5))
+                || (!dig4.equals(dig2) && dig4.equals(dig3) && !dig4.equals(dig1) && dig4.equals(dig5))
+                || (!dig4.equals(dig2) && !dig4.equals(dig3) && dig4.equals(dig1) && dig4.equals(dig5))
+                || (dig5.equals(dig2) && dig5.equals(dig3) && !dig5.equals(dig4) && !dig5.equals(dig1))
+                || (dig5.equals(dig2) && !dig5.equals(dig3) && dig5.equals(dig4) && !dig5.equals(dig1))
+                || (dig5.equals(dig2) && !dig5.equals(dig3) && !dig5.equals(dig4) && dig5.equals(dig1))
+                || (!dig5.equals(dig2) && dig5.equals(dig3) && dig5.equals(dig4) && !dig5.equals(dig1))
+                || (!dig5.equals(dig2) && dig5.equals(dig3) && !dig5.equals(dig4) && dig5.equals(dig1))
+                || (!dig5.equals(dig2) && !dig5.equals(dig3) && dig5.equals(dig4) && dig5.equals(dig1)));
     }
 
     public boolean isDosPares(String dig1, String dig2, String dig3, String dig4, String dig5) {
