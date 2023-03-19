@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import logica.MetodosExcel;
+import logica.ResolverProblema;
 import static vista.JFrResolverProblemas.ResoltablaMatriz;
 import static vista.JFrResolverProblemas.meto;
 
@@ -21,11 +22,13 @@ public class JFrMostrarResultProblemas extends javax.swing.JFrame {
      * Creates new form JFrMostrarResultProblemas
      */
     DefaultTableModel modelo;
+    ResolverProblema resolt; 
     
     public JFrMostrarResultProblemas() {
         initComponents();
         this.setLocationRelativeTo(null);
         modelo = new DefaultTableModel();
+        resolt = new ResolverProblema();
         
         MetodosExcel metodoExcel = new MetodosExcel();
         ArrayList<Float> numeros = new ArrayList();
@@ -38,6 +41,7 @@ public class JFrMostrarResultProblemas extends javax.swing.JFrame {
         if(meto==1){
             //la variable numero es la que contiene los valores de R
             System.out.println("expo");
+            
         }
         if(meto==2){
             System.out.println("pois");
