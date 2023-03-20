@@ -7,6 +7,7 @@ package vista;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import logica.ExportarExcel;
 import logica.MetodosExcel;
 import logica.ResolverProblema;
 import static vista.JFrResolverProblemas.ResoltablaMatriz;
@@ -22,34 +23,141 @@ public class JFrMostrarResultProblemas extends javax.swing.JFrame {
      * Creates new form JFrMostrarResultProblemas
      */
     DefaultTableModel modelo;
-    ResolverProblema resolt; 
-    
+    ResolverProblema resolt;
+
     public JFrMostrarResultProblemas() {
         initComponents();
         this.setLocationRelativeTo(null);
         modelo = new DefaultTableModel();
         resolt = new ResolverProblema();
-        
+
         MetodosExcel metodoExcel = new MetodosExcel();
         ArrayList<Float> numeros = new ArrayList();
+        ArrayList<ArrayList> datos = new ArrayList();
+
         try {
             numeros = metodoExcel.columnaNecesaria(ResoltablaMatriz, "r");
         } catch (IOException ex) {
             System.out.println(ex);
         }
         System.out.println(numeros);
-        if(meto==1){
-            //la variable numero es la que contiene los valores de R
-            System.out.println("expo");
+        if (meto == 1) {
+            datos = resolt.resolverExponencial(numeros);
+            String[] info = new String[datos.get(0).size() + 1];
+            String[] titulo = new String[]{"r", "X", "media", "resultado"};
+            modelo.setColumnIdentifiers(titulo);
+            jTableResultado.setModel(modelo);
+
+            info[2] = datos.get(1).get(0).toString();
+            for (int i = 0; i < datos.get(0).size(); i++) {
+                info[0] = numeros.get(i).toString();
+                info[1] = datos.get(0).get(i).toString();
+
+                if (i < 2) {
+                    info[3] = datos.get(2).get(i).toString();
+                }
+
+                if (i > 0) {
+                    info[2] = "";
+                }
+                if (i > 1) {
+                    info[3] = "";
+                }
+                modelo.addRow(info);
+            }
+
+        }
+        if (meto == 2) {
+            datos = resolt.poisson(numeros);
+            String[] info;
+            if(numeros.size() < datos.get(0).size()){
+                info = new String[datos.get(0).size()];
+            }else{
+                info = new String[numeros.size()];
+            }
             
+            String[] titulo = new String[]{"r", "X", "f(x)", "media", "Li", "Ls", "Rangos"};
+            modelo.setColumnIdentifiers(titulo);
+            jTableResultado.setModel(modelo);
+            if (numeros.size() < datos.get(0).size()) {
+                for (int i = 0; i < datos.get(0).size(); i++) {
+                    if (numeros.size() > i) {
+                        info[0] = numeros.get(i).toString();
+                        info[6] = datos.get(5).get(i).toString();
+                    } else {
+                        info[0] = "";
+                        info[6] = "";
+                    }
+
+                    info[1] = datos.get(0).get(i).toString();
+                    info[2] = datos.get(1).get(i).toString();
+                    if (i == 0) {
+                        info[3] = datos.get(2).get(i).toString();
+                    } else {
+                        info[3] = "";
+                    }
+                    info[4] = datos.get(3).get(i).toString();
+                    info[5] = datos.get(4).get(i).toString();
+
+                    modelo.addRow(info);
+                }
+
+            } else {
+                for (int i = 0; i < numeros.size(); i++) {
+                    info[0] = numeros.get(i).toString();
+                    info[6] = datos.get(5).get(i).toString();
+
+                    if (datos.get(0).size() > i) {
+                        info[1] = datos.get(0).get(i).toString();
+                        info[2] = datos.get(1).get(i).toString();
+                        if (i == 0) {
+                            info[3] = datos.get(2).get(i).toString();
+                        } else {
+                            info[3] = "";
+                        }
+                        info[4] = datos.get(3).get(i).toString();
+                        info[5] = datos.get(4).get(i).toString();
+
+                    } else {
+                        info[1] = "";
+                        info[2] = "";
+                        info[3] = "";
+                        info[4] = "";
+                        info[5] = "";
+                    }
+
+                    modelo.addRow(info);
+                }
+            }
+
         }
-        if(meto==2){
-            System.out.println("pois");
+        if (meto == 3) {
+            datos = resolt.uniforme(numeros);
+            String[] info = new String[datos.get(1).size() + 1];
+            String[] titulo = new String[]{"r", "a", "b", "X", "resultado"};
+            modelo.setColumnIdentifiers(titulo);
+            jTableResultado.setModel(modelo);
+            info[1] = datos.get(0).get(0).toString();
+            info[2] = datos.get(0).get(1).toString();
+            for (int i = 0; i < datos.get(1).size(); i++) {
+                info[0] = numeros.get(i).toString();
+                info[3] = datos.get(1).get(i).toString();
+                if (i < 4) {
+                    info[4] = datos.get(2).get(i).toString();
+                }
+
+                if (i > 0) {
+                    info[1] = "";
+                    info[2] = "";
+                }
+                if (i > 3) {
+                    info[4] = "";
+                }
+                modelo.addRow(info);
+            }
+
         }
-        if(meto==3){
-            
-        }
-        
+
     }
 
     /**
@@ -105,6 +213,11 @@ public class JFrMostrarResultProblemas extends javax.swing.JFrame {
         });
 
         jButtonExportar.setText("Exportar");
+        jButtonExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -155,6 +268,18 @@ public class JFrMostrarResultProblemas extends javax.swing.JFrame {
         problem.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonRegresarActionPerformed
+
+    private void jButtonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarActionPerformed
+        // TODO add your handling code here:
+        ExportarExcel obj;
+
+        try {
+            obj = new ExportarExcel();
+            obj.exportarExcel(jTableResultado);
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex);
+        }
+    }//GEN-LAST:event_jButtonExportarActionPerformed
 
     /**
      * @param args the command line arguments
