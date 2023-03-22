@@ -56,7 +56,7 @@ public class ResolverProblema {
         System.out.println("favorables: " + favorables);
         double probabilidad = ((double) favorables / numeros.size());
 
-        System.out.println("Probabilidad de " + msj + " entre [" + limInf + " - " + limSup + "] es: " + probabilidad);
+        JOptionPane.showMessageDialog(null,"Probabilidad de " + msj + " en el intervalo [" + limInf + " - " + limSup + "] es: " + probabilidad);
         med.add(media);
         result.add((float)favorables);
         result.add((float)probabilidad);
@@ -78,14 +78,15 @@ public class ResolverProblema {
     }
 
     public ArrayList<ArrayList> poisson(ArrayList<Float> numeros) {
-        int lambda = 0;
+        float lambda = 0;
         ArrayList<ArrayList> datos = new ArrayList();
-        ArrayList<Integer> media = new ArrayList();
+        ArrayList<Float> media = new ArrayList();
         
-        lambda = Integer.parseInt(JOptionPane.showInputDialog("Digite el valor de la media (λ): "));
+        lambda = Float.parseFloat(JOptionPane.showInputDialog("Digite el valor de la media (λ): "));
 
         ArrayList<Integer> X = new ArrayList<>();
-        for (int i = 0; i <= lambda * 3; i++) {
+        
+        for (int i = 0; i <= Math.ceil(lambda)*3; i++) {
             X.add(i);
         }
 
